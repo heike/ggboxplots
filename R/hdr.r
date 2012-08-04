@@ -6,11 +6,8 @@
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y values
-##' @param bandwidth value for kernel density
-##' @param alpha parameter for alpha blending
-##' @param fill color or symbol to fill in violins. 
-##' @param ... other parameters 
-##' @return ggplot2 layer of violins
+##' @param probs vector of probabilities as cut-offs for the density regions
+##' @return ggplot2 layer of highest density region boxplots.
 ##' @author Heike Hofmann
 ##' @export  
 ##' @examples

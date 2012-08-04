@@ -11,16 +11,11 @@
 
   \item{y}{values}
 
-  \item{bandwidth}{value for kernel density}
-
-  \item{alpha}{parameter for alpha blending}
-
-  \item{fill}{color or symbol to fill in violins.}
-
-  \item{...}{other parameters}
+  \item{probs}{vector of probabilities as cut-offs for the
+  density regions}
 }
 \value{
-  ggplot2 layer of violins
+  ggplot2 layer of highest density region boxplots.
 }
 \description{
   Create a high density region boxplots (Hyndman, 1996)
