@@ -16,11 +16,13 @@
 ##' gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25)) + 
 ##'   scale_fill_brewer(palette="Set1") + 
 ##'   scale_colour_brewer(palette="Set1")
-gghdr <- function(data, x, y, probs= c(90, 50, 25)) {
+gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50") {
   arguments <- as.list(match.call()[-1])
   group <- eval(arguments$x, data)
   y <- eval(arguments$y, data)
-  frame <- data.frame(group=group, y=y)
+  frame <- data.frame(group=group, y=y, data)
+  if (!is.null(arguments$fill)) fill <- arguments$fill
+
   hdr.df <- ddply(frame, .(group), function(x) {
     res <- hdr(x$y, prob=probs)
     m <- res$hdr
@@ -41,20 +43,30 @@ gghdr <- function(data, x, y, probs= c(90, 50, 25)) {
     res <- x[x$y > max(outsub$x2) | x$y < min(outsub$x1),]
     res
   })
+
+  if (is.symbol(arguments$fill)) {
+    p <- ggplot(aes(fill=group), data=hdr.df)
+  } 
+  else   p <- ggplot(fill=fill, data=hdr.df)
   
-  p <- ggplot(aes(fill=group), data=hdr.df) + 
-    geom_rect(aes(xmin=as.numeric(group)-0.4, #*sqrt(probs/100),          
-                  xmax=as.numeric(group)+0.4, #*sqrt(probs/100), 
-                  ymin=x1, ymax=x2), alpha=0.5) + 
-    geom_segment(aes(x=as.numeric(group)-0.45,
+  p <- p + 
+    geom_rect(aes(xmin=as.numeric(group)-0.4, 
+                  xmax=as.numeric(group)+0.4, 
+                  ymin=x1, ymax=x2), alpha=0.5)  
+  if (is.symbol(arguments$fill)) {
+    p <- p + geom_segment(aes(x=as.numeric(group)-0.45,
+                          xend=as.numeric(group)+0.45,
+                          y=mode, yend=mode,
+                          colour=group))
+  } 
+  else   p <- p + geom_segment(aes(x=as.numeric(group)-0.45,
                                      xend=as.numeric(group)+0.45,
-                                     y=mode, yend=mode,
-                                     colour=group)) + 
-   geom_point(aes(x=as.numeric(group), y=y), data=outliers) + 
-   scale_x_continuous(breaks=unique(group), labels=levels(group)) + 
-   xlab(arguments$x) + ylab(arguments$y)
+                                     y=mode, yend=mode
+                                     ))
   
   
+  p <- p + geom_point(aes(as.numeric(group), y), data=outliers) +
+    scale_x_continuous(arguments$x, breaks=1:length(levels(group)), labels=levels(group)) +
+    ylab(arguments$y)
   p
-  
 }
