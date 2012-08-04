@@ -67,6 +67,7 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##' 
 ##' Create a vase plot within the ggplot2 framework
 ##'
+##' Need the reference to the Benjamini paper.
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y continuous variable
@@ -77,7 +78,7 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##' @examples
 ##' data(diamonds)
 ##' ggvase(diamonds, color, price, bandwidth=500)
-##' ggvase(diamonds, cut, price, bandwidth=500)
+##' ggvase(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(palette="Set1")
 ggvase <- function(data, x, y, bandwidth, ...) {
   suppressMessages(require(plyr))
   arguments <- as.list(match.call()[-1])
@@ -87,13 +88,12 @@ ggvase <- function(data, x, y, bandwidth, ...) {
   
   fill <- "grey50"
   fillaes <- NULL
-#  browser()
   
   if (!is.null(arguments$fill)) {
-    if (is.character(arguments$fill)) fill <- arguments$fill
-    else {
+    if (is.symbol(arguments$fill)) { 
       fillaes <- arguments$fill
-    }
+      frame$fill <- eval(arguments$fill, data)                                   
+    } else fill <- arguments$fill
   }  
   
   vd <- dlply(frame, .(group), function(x) {
@@ -102,6 +102,8 @@ ggvase <- function(data, x, y, bandwidth, ...) {
     df$group <- x$group[1]
     df$x <- df$x + as.numeric(df$group)[1]
     df$order <- 1:nrow(df)
+#    browser()
+    if (!is.null(fillaes)) df$fill <- x$fill[1]
     body <- df
     
     df <- data.frame(vd[[1]]$median)
