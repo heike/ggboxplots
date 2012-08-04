@@ -7,6 +7,7 @@
 ##' @param x factor variable
 ##' @param y values
 ##' @param probs vector of probabilities as cut-offs for the density regions
+##' @param fill fill color of highest density regions. Either a color description (name or hex string), or grouping variable.
 ##' @return ggplot2 layer of highest density region boxplots.
 ##' @author Heike Hofmann
 ##' @export  
@@ -16,12 +17,13 @@
 ##' gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25)) + 
 ##'   scale_fill_brewer(palette="Set1") + 
 ##'   scale_colour_brewer(palette="Set1")
+##' gghdr(diamonds, color, price) + facet_wrap(~cut)  
 gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50") {
   arguments <- as.list(match.call()[-1])
   group <- eval(arguments$x, data)
   y <- eval(arguments$y, data)
   frame <- data.frame(group=group, y=y, data)
-  if (!is.null(arguments$fill)) fill <- arguments$fill
+  if (!is.null(arguments$fill)) frame$fill <- eval(arguments$fill, data)
 
   hdr.df <- ddply(frame, .(group), function(x) {
     res <- hdr(x$y, prob=probs)
@@ -33,6 +35,8 @@ gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50") {
         out <- rbind(out, data.frame(x1=m[,2*i-1], x2=m[,2*i]))
     out$probs <- probs
     out$group <- x$group[1]
+    if (is.symbol(arguments$fill))
+      out$fill <- x$fill[1]
     out$mode <- res$mode
     out  
   })
@@ -45,25 +49,24 @@ gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50") {
   })
 
   if (is.symbol(arguments$fill)) {
-    p <- ggplot(aes(fill=group), data=hdr.df)
-  } 
-  else   p <- ggplot(fill=fill, data=hdr.df)
-  
-  p <- p + 
-    geom_rect(aes(xmin=as.numeric(group)-0.4, 
-                  xmax=as.numeric(group)+0.4, 
-                  ymin=x1, ymax=x2), alpha=0.5)  
-  if (is.symbol(arguments$fill)) {
-    p <- p + geom_segment(aes(x=as.numeric(group)-0.45,
+    p <- ggplot(aes(fill=group), data=hdr.df) + 
+      geom_rect(aes(xmin=as.numeric(group)-0.4, 
+       xmax=as.numeric(group)+0.4, 
+       ymin=x1, ymax=x2, fill=group), alpha=0.5) + 
+         geom_segment(aes(x=as.numeric(group)-0.45,
                           xend=as.numeric(group)+0.45,
                           y=mode, yend=mode,
-                          colour=group))
+                          colour=group))   
   } 
-  else   p <- p + geom_segment(aes(x=as.numeric(group)-0.45,
-                                     xend=as.numeric(group)+0.45,
-                                     y=mode, yend=mode
-                                     ))
-  
+  else   
+    p <- ggplot(data=hdr.df) + 
+      geom_rect(aes(xmin=as.numeric(group)-0.4, 
+      xmax=as.numeric(group)+0.4, 
+      ymin=x1, ymax=x2), fill=fill, alpha=0.5) + 
+        geom_segment(aes(x=as.numeric(group)-0.45,
+                         xend=as.numeric(group)+0.45,
+                         y=mode, yend=mode
+        ))  
   
   p <- p + geom_point(aes(as.numeric(group), y), data=outliers) +
     scale_x_continuous(arguments$x, breaks=1:length(levels(group)), labels=levels(group)) +
