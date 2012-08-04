@@ -17,14 +17,15 @@
 ##' gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25)) + 
 ##'   scale_fill_brewer(palette="Set1") + 
 ##'   scale_colour_brewer(palette="Set1")
-##' gghdr(diamonds, color, price) + facet_wrap(~cut)  
-gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50") {
+gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50", ...) {
   arguments <- as.list(match.call()[-1])
   group <- eval(arguments$x, data)
   y <- eval(arguments$y, data)
   frame <- data.frame(group=group, y=y, data)
   if (!is.null(arguments$fill)) frame$fill <- eval(arguments$fill, data)
-
+#  facets <- NULL
+#  if (!is.null(arguments$facets)) facets <- "cut"
+  
   hdr.df <- ddply(frame, .(group), function(x) {
     res <- hdr(x$y, prob=probs)
     m <- res$hdr
