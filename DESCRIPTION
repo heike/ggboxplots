@@ -1,6 +1,6 @@
 Package: ggboxplots
 Type: Package
-Title: Variations of Boxplots
+Title: Variations of Boxplots in ggplot2
 Version: 1.0
 Date: 2012-07-02
 Author: Heike Hofmann, Marie Vendettuoli
@@ -12,8 +12,10 @@ Depends:
     ggplot2,
     reshape2,
     plyr,
-    sm
+    sm,
+    hdrcde
 Collate:
     'help.R'
     'vase.r'
     'violin.r'
+    'hdr.r'

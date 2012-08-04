@@ -97,6 +97,5 @@ ggviolin <- function(data, x, y, bandwidth, alpha = 0.5, fill = "grey60", ...) {
   p <- p+  geom_boxplot(aes(x = as.numeric(group), y=y, group = group), colour="grey60", width = .1, data=frame) +
     scale_x_continuous(breaks= 1:length(levels(frame$group)), labels=levels(frame$group))
   
-  
   p
 }
