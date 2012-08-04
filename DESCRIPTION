@@ -11,7 +11,9 @@ License: MIT
 Depends:
     ggplot2,
     reshape2,
-    plyr
+    plyr,
+    sm
 Collate:
     'help.R'
     'vase.r'
+    'violin.r'
