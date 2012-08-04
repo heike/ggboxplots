@@ -1,3 +1,11 @@
+##' Calculations for vase plots.
+##'
+##' @param x continuous variable
+##' @param ... other variables
+##' @param names labels
+##' @param bw bandwidth for kernel density 
+##' @return list of numeric descriptions of body, whiskers, outliers and the median
+##' @author Kayla
 calc_vase <- function(x, ..., names = NULL, bw = NULL) {
   all.x <- c(x, list(...))
 
@@ -77,6 +85,17 @@ ggvase <- function(data, x, y, bandwidth, ...) {
   y <- eval(arguments$y, data)
   frame <- data.frame(group=group, y=y)
   
+  fill <- "grey50"
+  fillaes <- NULL
+#  browser()
+  
+  if (!is.null(arguments$fill)) {
+    if (is.character(arguments$fill)) fill <- arguments$fill
+    else {
+      fillaes <- arguments$fill
+    }
+  }  
+  
   vd <- dlply(frame, .(group), function(x) {
     vd <- calc_vase(x=list(x$y), bw = bandwidth)
     df <- data.frame(vd[[1]]$body)
@@ -126,15 +145,16 @@ ggvase <- function(data, x, y, bandwidth, ...) {
     data.frame(vd[[x]]$whisker)
   )
 #  fill=factor(group), colour=factor(group)),
-  p <- ggplot(aes(x, y, group=group),  data=vdbody, fill="grey50", colour="grey80") + 
-    geom_polygon(alpha=0.5) + 
-    geom_segment(aes(xend=xend,yend=yend), data=vdmedian) +
-    geom_segment(aes(xend=xend,yend=yend), data=vdwhisker) + 
-    scale_x_discrete(arguments$x, breaks=1+1:length(levels(group)), labels=levels(group), expand=c(0,0)) + 
-    scale_y_continuous(arguments$y)
+  if (!is.null(fillaes)) p <- geom_polygon(aes(x, y, group=group, fill=group),  data=vdbody,  colour="grey80", alpha=0.5)
+  else p <- geom_polygon(aes(x, y, group=group), fill=fill,  data=vdbody,  colour="grey80", alpha=0.5)
+  p <- list(p,
+    geom_segment(aes(x, y, group=group, xend=xend,yend=yend), data=vdmedian),
+    geom_segment(aes(x, y, group=group, xend=xend,yend=yend), data=vdwhisker), 
+    scale_x_discrete(arguments$x, breaks=1+1:length(levels(group)), labels=levels(group), expand=c(0,0)),
+    scale_y_continuous(arguments$y))
     
   if (!is.null(vdoutlier))	
-    p <- p + geom_point(colour="grey10", size=1.5, data=vdoutlier)
+    p <- list(p, geom_point(aes(x, y), colour="grey10", size=1.5, data=vdoutlier))
   
-  p
+  ggplot() + p
 }
