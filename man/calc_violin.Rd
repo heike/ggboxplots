@@ -7,13 +7,14 @@
 \arguments{
   \item{x}{continuous variable}
 
-  \item{at}{}
+  \item{at}{position of each violin. Defaults to 1:n}
 
   \item{h}{bandwidth for kernel density}
 
-  \item{range}{}
+  \item{range}{numerical value to calculate the upper/lower
+  adjacent values}
 
-  \item{wex}{}
+  \item{wex}{relative expansion of the violin}
 }
 \value{
   list of numeric descriptions of body and outliers

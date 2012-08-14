@@ -11,6 +11,9 @@
 
   \item{y}{continuous variable}
 
+  \item{bandwidth}{value for the bandwidth of the kernel
+  smoother}
+
   \item{...}{other parameters}
 }
 \value{

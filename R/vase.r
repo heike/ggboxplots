@@ -71,6 +71,7 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y continuous variable
+##' @param bandwidth value for the bandwidth of the kernel smoother
 ##' @param ... other parameters 
 ##' @return ggplot2 layer of vases
 ##' @author Heike Hofmann

@@ -4,10 +4,10 @@
 ##' copied (except for return statement) verbatim from function vioplot, package vioplot v0.2
 ##'  
 ##' @param x continuous variable
-##' @param at
+##' @param at position of each violin. Defaults to 1:n
 ##' @param h bandwidth for kernel density 
-##' @param range
-##' @param wex 
+##' @param range numerical value to calculate the upper/lower adjacent values
+##' @param wex relative expansion of the violin
 ##' @return list of numeric descriptions of body and outliers
 calc_violin <- function(x, at, h = NA, range = 1.5, wex = 1){
   datas <- list(x)

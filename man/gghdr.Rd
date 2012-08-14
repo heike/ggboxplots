@@ -2,7 +2,8 @@
 \alias{gghdr}
 \title{High Density Region plots.}
 \usage{
-  gghdr(data, x, y, probs = c(90, 50, 25))
+  gghdr(data, x, y, probs = c(90, 50, 25), fill = "grey50",
+    ...)
 }
 \arguments{
   \item{data}{dataset}
@@ -13,6 +14,13 @@
 
   \item{probs}{vector of probabilities as cut-offs for the
   density regions}
+
+  \item{fill}{fill color of highest density regions. Either
+  a color description (name or hex string), or grouping
+  variable.}
+
+  \item{...}{other parameters passed on to the ggplot2
+  framework}
 }
 \value{
   ggplot2 layer of highest density region boxplots.

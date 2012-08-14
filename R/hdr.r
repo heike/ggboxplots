@@ -8,6 +8,7 @@
 ##' @param y values
 ##' @param probs vector of probabilities as cut-offs for the density regions
 ##' @param fill fill color of highest density regions. Either a color description (name or hex string), or grouping variable.
+##' @param ... other parameters passed on to the ggplot2 framework
 ##' @return ggplot2 layer of highest density region boxplots.
 ##' @author Heike Hofmann
 ##' @export  
