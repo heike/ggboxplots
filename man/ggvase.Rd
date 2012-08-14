@@ -23,7 +23,9 @@
   Create a vase plot within the ggplot2 framework
 }
 \details{
-  Need the reference to the Benjamini paper.
+  Vase plots have been introduced by Yoav (1988). The idea
+  of a vase plot is to represent the kernel density
+  estimate instead of the box of a regular boxplot.
 }
 \examples{
 data(diamonds)
@@ -32,5 +34,9 @@ ggvase(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(palett
 }
 \author{
   Heike Hofmann
+}
+\references{
+  Benjamini, Yoav "Opening the Box of a Boxplot" The
+  American Statistician, pp. 257-262, 1988.
 }
 

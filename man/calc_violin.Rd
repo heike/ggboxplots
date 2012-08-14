@@ -24,4 +24,7 @@
   to package vioplot copied (except for return statement)
   verbatim from function vioplot, package vioplot v0.2
 }
+\author{
+  Marie Vendettuoli
+}
 

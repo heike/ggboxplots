@@ -8,6 +8,7 @@
 ##' @param h bandwidth for kernel density 
 ##' @param range numerical value to calculate the upper/lower adjacent values
 ##' @param wex relative expansion of the violin
+##' @author Marie Vendettuoli
 ##' @return list of numeric descriptions of body and outliers
 calc_violin <- function(x, at, h = NA, range = 1.5, wex = 1){
   datas <- list(x)

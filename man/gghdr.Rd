@@ -27,7 +27,12 @@
 }
 \description{
   Create a high density region boxplots (Hyndman, 1996)
-  within the ggplot2 framework. The code is based on the
+  within the ggplot2 framework. HDR plots are based on a
+  density estimate of the marginal distribution. Cutoff
+  values for the probability are defined in the parameter
+  \code{probs} to define regions. In a uni-modal situation,
+  the HDR plots with probability \code{probs=0.25} show the
+  boxes of a regular boxplot. The code is based on the
   \code{hdrcde} package
 }
 \examples{

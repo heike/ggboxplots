@@ -1,5 +1,5 @@
 ##' Calculations for vase plots.
-##'
+##' 
 ##' @param x continuous variable
 ##' @param ... other variables
 ##' @param names labels
@@ -67,7 +67,9 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##' 
 ##' Create a vase plot within the ggplot2 framework
 ##'
-##' Need the reference to the Benjamini paper.
+##' Vase plots have been introduced by Yoav (1988). The idea of a vase plot is to represent the kernel density estimate 
+##' instead of the box of a regular boxplot.
+##' @references Benjamini, Yoav "Opening the Box of a Boxplot" The  American Statistician, pp. 257-262, 1988. 
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y continuous variable
