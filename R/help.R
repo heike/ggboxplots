@@ -1,10 +1,9 @@
 #' A package for creating common variations of boxplots
 #'
 #' Boxplot variations, such as vase plots, violin plots, and high density region plots.
-#' See \cite{\link ggvase, ggviolin} and \cite{\link{gghdr}}
-#' Eventually these functions are supposed to go into the \code{\link{GGally}} package. 
-#' 
+#' See \code{\link{ggvase}, \code{ggviolin}} and \code{\link{gghdr}} 
 #'
 #' @docType package
+#' @bibliography ggboxplots/inst/references.bib
 #' @name package-ggboxplots
 NULL

@@ -4,7 +4,6 @@
 ##' Cutoff values for the probability are defined in the parameter \code{probs} to define regions. In a uni-modal situation, the HDR plots with probability \code{probs=0.25} 
 ##' show the boxes of a regular boxplot. The code is based on the \code{hdrcde} package
 ##'
-##' @references Hyndman, R.J. (1996) Computing and graphing highest density regions American Statistician, 50, 120-126.
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y values
@@ -13,11 +12,12 @@
 ##' @param ... other parameters passed on to the ggplot2 framework
 ##' @return ggplot2 layer of highest density region boxplots.
 ##' @author Heike Hofmann
+##' @cite hyndman
 ##' @export  
 ##' @examples
 ##' data(diamonds)
 ##' gghdr(diamonds, color, price)
-##' gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25)) + 
+##' gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25), fill=cut) + 
 ##'   scale_fill_brewer(palette="Set1") + 
 ##'   scale_colour_brewer(palette="Set1")
 gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50", ...) {
@@ -28,6 +28,7 @@ gghdr <- function(data, x, y, probs= c(90, 50, 25), fill="grey50", ...) {
   if (!is.null(arguments$fill)) frame$fill <- eval(arguments$fill, data)
 #  facets <- NULL
 #  if (!is.null(arguments$facets)) facets <- "cut"
+  x1=x2=NULL
   
   hdr.df <- ddply(frame, .(group), function(x) {
     res <- hdr(x$y, prob=probs)

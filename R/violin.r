@@ -60,7 +60,6 @@ calc_violin <- function(x, at, h = NA, range = 1.5, wex = 1){
 ##' Create a violin plot within the ggplot2 framework
 ##'
 ##' Violin plots have been introduced by Hintze and Nelson (1998).
-##' @references Hintze, Jerry L., and Ray D. Nelson. 1998. "Violin Plots: A Box Plot-Density Trace Synergism." The American Statistician 52(2):181-84
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y values
@@ -70,6 +69,7 @@ calc_violin <- function(x, at, h = NA, range = 1.5, wex = 1){
 ##' @param ... other parameters 
 ##' @return ggplot2 layer of violins
 ##' @author Heike Hofmann
+##' @cite hintze
 ##' @export  
 ##' @examples
 ##' data(diamonds)

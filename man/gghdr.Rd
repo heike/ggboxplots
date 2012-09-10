@@ -38,7 +38,7 @@
 \examples{
 data(diamonds)
 gghdr(diamonds, color, price)
-gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25)) +
+gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25), fill=cut) +
   scale_fill_brewer(palette="Set1") +
   scale_colour_brewer(palette="Set1")
 }
@@ -46,7 +46,8 @@ gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25)) +
   Heike Hofmann
 }
 \references{
-  Hyndman, R.J. (1996) Computing and graphing highest
-  density regions American Statistician, 50, 120-126.
+  Hyndman RJ (1996). "Computing and graphing highest
+  density regions." _American Statistician_, *50*, pp.
+  120-126.
 }
 

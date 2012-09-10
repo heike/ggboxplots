@@ -36,7 +36,7 @@ ggvase(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(palett
   Heike Hofmann
 }
 \references{
-  Benjamini, Yoav "Opening the Box of a Boxplot" The
-  American Statistician, pp. 257-262, 1988.
+  Benjamini Y (1988). "Opening the Box of a Boxplot." _The
+  American Statistician_, pp. 257-262.
 }
 

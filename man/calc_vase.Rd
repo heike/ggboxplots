@@ -21,6 +21,6 @@
   Calculations for vase plots.
 }
 \author{
-  Kayla
+  Lisa Stryjewski
 }
 

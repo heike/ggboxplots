@@ -5,9 +5,7 @@
 \title{A package for creating common variations of boxplots}
 \description{
   Boxplot variations, such as vase plots, violin plots, and
-  high density region plots. See \cite{\link ggvase,
-  ggviolin} and \cite{\link{gghdr}} Eventually these
-  functions are supposed to go into the
-  \code{\link{GGally}} package.
+  high density region plots. See \code{\link{ggvase},
+  \code{ggviolin}} and \code{\link{gghdr}}
 }
 

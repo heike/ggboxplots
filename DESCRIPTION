@@ -10,10 +10,11 @@ Description: R package for creating variations of boxplots using
 License: MIT
 Depends:
     ggplot2,
-    reshape2,
     plyr,
     sm,
     hdrcde
+Imports:
+    reshape2
 Collate:
     'help.R'
     'vase.r'

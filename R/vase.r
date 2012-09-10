@@ -5,7 +5,7 @@
 ##' @param names labels
 ##' @param bw bandwidth for kernel density 
 ##' @return list of numeric descriptions of body, whiskers, outliers and the median
-##' @author Kayla
+##' @author Lisa Stryjewski
 calc_vase <- function(x, ..., names = NULL, bw = NULL) {
   all.x <- c(x, list(...))
 
@@ -14,7 +14,7 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
   if (is.null(names)) {
     names <- names(all.x)
   }
-
+  
   vase <- list()
   for(i in 1:n) {
     lower <- quantile(all.x[[i]], probs = .25)
@@ -69,7 +69,6 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##'
 ##' Vase plots have been introduced by Yoav (1988). The idea of a vase plot is to represent the kernel density estimate 
 ##' instead of the box of a regular boxplot.
-##' @references Benjamini, Yoav "Opening the Box of a Boxplot" The  American Statistician, pp. 257-262, 1988. 
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y continuous variable
@@ -78,6 +77,7 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##' @return ggplot2 layer of vases
 ##' @author Heike Hofmann
 ##' @export  
+##' @cite benjamini
 ##' @examples
 ##' data(diamonds)
 ##' ggvase(diamonds, color, price, bandwidth=500)
@@ -91,6 +91,7 @@ ggvase <- function(data, x, y, bandwidth, ...) {
   
   fill <- "grey50"
   fillaes <- NULL
+  xend=yend=NULL
   
   if (!is.null(arguments$fill)) {
     if (is.symbol(arguments$fill)) { 
