@@ -23,11 +23,12 @@
   Create a vase plot within the ggplot2 framework
 }
 \details{
-  Vase plots have been introduced by Yoav (1988). The idea
-  of a vase plot is to represent the kernel density
-  estimate instead of the box for the inter-quartile range
-  of a regular boxplot. A bandwidth parameter is used to
-  control for smoothness of the curve.
+  The idea of a vase plot is to represent the kernel
+  density estimate instead of the box for the
+  inter-quartile range of a regular boxplot. A bandwidth
+  parameter is used to control for smoothness of the curve.
+  Vase plots have been introduced by \cite{Benjamini
+  (1988)}.
 }
 \examples{
 require(ggplot2)

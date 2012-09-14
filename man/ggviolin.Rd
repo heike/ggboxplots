@@ -29,12 +29,13 @@
   \code{vioplot 0.2} package.
 }
 \details{
-  Violin plots have been introduced by Hintze and Nelson
-  (1998). Additionally to the boxes of a boxplot, two
-  density curves are plotted opposing each other, and the
-  space between them is filled to create the shape of a
-  'violin'. As for any density estimation, a bandwidth
-  parameter is used to control smoothness.
+  The idea of a violin plot is, that additionally to the
+  boxes of a boxplot, two density curves are plotted
+  opposing each other, and the space between them is filled
+  to create the shape of a 'violin'. As for any density
+  estimation, a bandwidth parameter is used to control
+  smoothness. Violin plots have been introduced by
+  \cite{Hintze et al. (1998)}.
 }
 \examples{
 require(ggplot2)
