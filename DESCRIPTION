@@ -1,7 +1,7 @@
 Package: ggboxplots
 Type: Package
 Title: Variations of Boxplots in ggplot2
-Version: 1.0
+Version: 0.1
 Date: 2012-07-02
 Author: Heike Hofmann, Marie Vendettuoli
 Maintainer: Heike Hofmann <hofmann@iastate.edu>

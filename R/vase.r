@@ -68,7 +68,8 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##' Create a vase plot within the ggplot2 framework
 ##'
 ##' Vase plots have been introduced by Yoav (1988). The idea of a vase plot is to represent the kernel density estimate 
-##' instead of the box of a regular boxplot.
+##' instead of the box for the inter-quartile range of a regular boxplot. 
+##' A bandwidth parameter is used to control for smoothness of the curve.
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y continuous variable
@@ -79,6 +80,7 @@ calc_vase <- function(x, ..., names = NULL, bw = NULL) {
 ##' @export  
 ##' @cite benjamini
 ##' @examples
+##' require(ggplot2)
 ##' data(diamonds)
 ##' ggvase(diamonds, color, price, bandwidth=500)
 ##' ggvase(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(palette="Set1")
@@ -151,8 +153,8 @@ ggvase <- function(data, x, y, bandwidth, ...) {
     data.frame(vd[[x]]$whisker)
   )
 #  fill=factor(group), colour=factor(group)),
-  if (!is.null(fillaes)) p <- geom_polygon(aes(x, y, group=group, fill=group),  data=vdbody,  colour="grey80", alpha=0.5)
-  else p <- geom_polygon(aes(x, y, group=group), fill=fill,  data=vdbody,  colour="grey80", alpha=0.5)
+  if (!is.null(fillaes)) p <- geom_polygon(aes(x, y, group=group, fill=group),  data=vdbody,  colour="grey80", alpha=0.7)
+  else p <- geom_polygon(aes(x, y, group=group), fill=fill,  data=vdbody,  colour="grey80", alpha=0.7)
   p <- list(p,
     geom_segment(aes(x, y, group=group, xend=xend,yend=yend), data=vdmedian),
     geom_segment(aes(x, y, group=group, xend=xend,yend=yend), data=vdwhisker), 

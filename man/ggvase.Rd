@@ -25,9 +25,12 @@
 \details{
   Vase plots have been introduced by Yoav (1988). The idea
   of a vase plot is to represent the kernel density
-  estimate instead of the box of a regular boxplot.
+  estimate instead of the box for the inter-quartile range
+  of a regular boxplot. A bandwidth parameter is used to
+  control for smoothness of the curve.
 }
 \examples{
+require(ggplot2)
 data(diamonds)
 ggvase(diamonds, color, price, bandwidth=500)
 ggvase(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(palette="Set1")

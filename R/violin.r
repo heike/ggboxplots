@@ -57,9 +57,12 @@ calc_violin <- function(x, at, h = NA, range = 1.5, wex = 1){
 
 ##' Violin plots.
 ##' 
-##' Create a violin plot within the ggplot2 framework
+##' Create a violin plot within the ggplot2 framework. The code for calculating violins is based on the \code{vioplot 0.2} package.
 ##'
-##' Violin plots have been introduced by Hintze and Nelson (1998).
+##' Violin plots have been introduced by Hintze and Nelson (1998). Additionally to the boxes of a 
+##' boxplot, two density curves are plotted opposing each other, and the space between them is 
+##' filled to create the shape of a 'violin'.
+##' As for any density estimation, a bandwidth parameter is used to control smoothness.
 ##' @param data dataset
 ##' @param x factor variable
 ##' @param y values
@@ -72,6 +75,7 @@ calc_violin <- function(x, at, h = NA, range = 1.5, wex = 1){
 ##' @cite hintze
 ##' @export  
 ##' @examples
+##' require(ggplot2)
 ##' data(diamonds)
 ##' ggviolin(diamonds, color, price, bandwidth=500)
 ##' ggviolin(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(palette="Set1")

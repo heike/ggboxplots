@@ -15,6 +15,7 @@
 ##' @cite hyndman
 ##' @export  
 ##' @examples
+##' require(ggplot2)
 ##' data(diamonds)
 ##' gghdr(diamonds, color, price)
 ##' gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25), fill=cut) + 
