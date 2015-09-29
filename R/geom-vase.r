@@ -118,10 +118,10 @@ GeomVase <- ggplot2::ggproto("GeomVase", ggplot2::Geom,
 #' # Add aesthetic mappings
 #' # Note that vases are automatically dodged when any aesthetic is 
 #' # a factor
-#' p + geom_vase(aes(fill = cyl)) # doesn't work
+#' p + geom_vase(aes(fill = cyl)) 
 #' p + geom_vase(aes(fill = factor(cyl)))
-#' p + geom_vase(aes(fill = factor(vs)))
-#' p + geom_vase(aes(fill = factor(am)))
+#' p + geom_vase(aes(fill = factor(vs))) # doesn't work
+#' p + geom_vase(aes(fill = factor(am))) # doesn't work
 #' 
 #' # Set aesthetics to fixed value
 #' p + geom_vase(fill = "grey80", colour = "#3366FF")

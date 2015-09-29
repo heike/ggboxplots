@@ -5,8 +5,8 @@
 \title{Combination of boxplot and 1d kernel density estimate along y axis, for vase plot.}
 \usage{
 stat_vase(mapping = NULL, data = NULL, geom = "vase",
-  position = "identity", show.legend = NA, inherit.aes = TRUE,
-  width = 0.9, ...)
+  position = "dodge", adjust = 1, kernel = "gaussian", scale = "area",
+  show.legend = NA, inherit.aes = TRUE, width = 0.9, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
@@ -23,6 +23,15 @@ defined at the top level of the plot.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
+
+\item{adjust}{see \code{\link{density}} for details}
+
+\item{kernel}{kernel used for density estimation, see
+\code{\link{density}} for details}
+
+\item{scale}{if "area" (default), all vases have the same area (before trimming
+the tails). If "count", areas are scaled proportionally to the number of
+observations. If "width", all vases have the same maximum width.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -44,10 +53,6 @@ the default plot specification, e.g. \code{\link{borders}}.}
   \item Other arguments passed on to the stat.
   }}
 
-\item{scale}{if "area" (default), all vases have the same area (before trimming
-the tails). If "count", areas are scaled proportionally to the number of
-observations. If "width", all vases have the same maximum width.}
-
 \item{na.rm}{If \code{FALSE} (the default), removes missing values with
    a warning. If \code{TRUE} silently removes missing values.}
 }
@@ -55,7 +60,7 @@ observations. If "width", all vases have the same maximum width.}
 A data frame with additional columns:
   \item{density}{density estimate}
   \item{scaled}{density estimate, scaled to maximum of 1}
-  \item{count}{density * number of points - probably useless for violin plots}
+  \item{count}{density * number of points - not sure about usefulness for vase plots}
   \item{vasewidth}{density scaled for the vase plot, according to area, counts
                      or to a constant maximum width}
   \item{n}{number of points}

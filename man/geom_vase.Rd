@@ -5,8 +5,8 @@
 \title{Side by side vase plots.}
 \usage{
 geom_vase(mapping = NULL, data = NULL, stat = "vase",
-  position = "identity", show.legend = NA, inherit.aes = TRUE,
-  width = 0.9, alpha = 0.25, ...)
+  position = "dodge", show.legend = NA, inherit.aes = TRUE, width = 0.9,
+  alpha = 0.25, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
@@ -73,8 +73,8 @@ p + geom_vase(adjust = .5)
 # a factor
 p + geom_vase(aes(fill = cyl))
 p + geom_vase(aes(fill = factor(cyl)))
-p + geom_vase(aes(fill = factor(vs)))
-p + geom_vase(aes(fill = factor(am)))
+p + geom_vase(aes(fill = factor(vs))) # doesn't work
+p + geom_vase(aes(fill = factor(am))) # doesn't work
 
 # Set aesthetics to fixed value
 p + geom_vase(fill = "grey80", colour = "#3366FF")
