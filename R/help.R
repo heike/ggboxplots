@@ -1,13 +1,13 @@
 #' A package for creating common variations of boxplots
 #'
-#' THis package brings a set of variations of boxplots to the \code{ggplot2}.framework.
+#' This package brings a set of variations of boxplots to the \code{ggplot2}.framework.
 #' Implemented are vase plots, violin plots, and high density 
 #' region plots. 
 #' See \code{\link{ggvase}, \link{ggviolin}} and \code{\link{gghdr}} 
 #'
 #' @docType package
 #' @name ggboxplots 
-#' @cite benjamini hintze hyndman
+#' @references benjamini hintze hyndman
 #' @examples
 #' require(ggplot2)
 #' ggviolin(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(palette="Set1")

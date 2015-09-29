@@ -1,22 +1,21 @@
 Package: ggboxplots
 Type: Package
 Title: Variations of Boxplots in ggplot2
-Version: 0.1
+Version: 0.0.2
 Date: 2012-07-02
 Author: Heike Hofmann, Marie Vendettuoli
 Maintainer: Heike Hofmann <hofmann@iastate.edu>
 Description: R package for creating variations of boxplots using
     the ggplot2 framework.
-License: MIT
+License: GPL (>= 2)
+LazyData: TRUE
 Depends:
-    ggplot2,
-    plyr,
-    sm,
-    hdrcde
+    R (>= 2.14)
 Imports:
-    reshape2
-Collate:
-    'help.R'
-    'vase.r'
-    'violin.r'
-    'hdr.r'
+  ggplot2 (>= 1.0.1.9003),
+  grid,
+  proto,
+  plyr,
+  sm,
+  hdrcde,
+  reshape2

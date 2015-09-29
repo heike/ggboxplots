@@ -12,7 +12,7 @@
 ##' @param ... other parameters passed on to the ggplot2 framework
 ##' @return ggplot2 layer of highest density region boxplots.
 ##' @author Heike Hofmann
-##' @cite hyndman
+##' @references hyndman
 ##' @export  
 ##' @examples
 ##' require(ggplot2)

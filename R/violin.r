@@ -73,7 +73,7 @@ calc_violin <- function(x, at, h = NA, range = 1.5, wex = 1){
 ##' @param ... other parameters 
 ##' @return ggplot2 layer of violins
 ##' @author Heike Hofmann
-##' @cite hintze
+##' @references hintze
 ##' @export  
 ##' @examples
 ##' require(ggplot2)
