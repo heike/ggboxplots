@@ -73,8 +73,8 @@ p + geom_vase(adjust = .5)
 # a factor
 p + geom_vase(aes(fill = cyl))
 p + geom_vase(aes(fill = factor(cyl)))
-p + geom_vase(aes(fill = factor(vs))) # doesn't work
-p + geom_vase(aes(fill = factor(am))) # doesn't work
+p + geom_vase(aes(fill = factor(vs)))
+p + geom_vase(aes(fill = factor(am)))
 
 # Set aesthetics to fixed value
 p + geom_vase(fill = "grey80", colour = "#3366FF")

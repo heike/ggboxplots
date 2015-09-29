@@ -78,7 +78,14 @@ StatVase <- ggplot2::ggproto("StatVase", ggplot2::Stat,
     
     fivenum <- StatBoxplot$compute_group(data=data, width=width, ...)
     data$weight <- 1/sum(data$weight)
-    dens <- suppressWarnings(StatYdensity$compute_group(data=data, adjust=adjust, ...))
+    if (nrow(data) < 3) {
+      dens <- data.frame(x=data$x, density=1/nrow(data), scaled=1/nrow(data), count=nrow(data), n=nrow(data), y=data$y)
+    } else {
+      dens <- suppressWarnings(StatYdensity$compute_group(data=data, adjust=adjust, ...))
+    }
+
+    # reduce data to box area:
+    dens <- dens[(dens$y >= fivenum$lower) & (dens$y <= fivenum$upper),]
     dens$fivenum <- I(list(fivenum))
     dens
   },

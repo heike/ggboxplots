@@ -10,7 +10,7 @@ GeomVase <- ggplot2::ggproto("GeomVase", ggplot2::Geom,
   
   draw_group = function(data, panel_scales, coord, ...) {
     fivenum <- data$fivenum[[1]]
-    
+
     common <- unique(data.frame(
       colour = data$colour, 
       size = data$size, 
@@ -21,8 +21,8 @@ GeomVase <- ggplot2::ggproto("GeomVase", ggplot2::Geom,
     ))
     
     whiskers <- data.frame(
-      x = fivenum$x,
-      xend = fivenum$x, 
+      x = data$x[1],
+      xend = data$x[1], 
       y = c(fivenum$upper, fivenum$lower), 
       yend = c(fivenum$ymax, fivenum$ymin),
       alpha = NA,
@@ -44,8 +44,6 @@ GeomVase <- ggplot2::ggproto("GeomVase", ggplot2::Geom,
       outliers_grob <- NULL
     }
     
-    # reduce data to box area:
-    data <- data[(data$y >= fivenum$lower) & (data$y <= fivenum$upper),]
     # Find the points for the line to go all the way around
     data <- transform(data, xminv = x - vasewidth * (x-xmin),
                       xmaxv = x + vasewidth * (xmax-x))
@@ -120,8 +118,8 @@ GeomVase <- ggplot2::ggproto("GeomVase", ggplot2::Geom,
 #' # a factor
 #' p + geom_vase(aes(fill = cyl)) 
 #' p + geom_vase(aes(fill = factor(cyl)))
-#' p + geom_vase(aes(fill = factor(vs))) # doesn't work
-#' p + geom_vase(aes(fill = factor(am))) # doesn't work
+#' p + geom_vase(aes(fill = factor(vs))) 
+#' p + geom_vase(aes(fill = factor(am))) 
 #' 
 #' # Set aesthetics to fixed value
 #' p + geom_vase(fill = "grey80", colour = "#3366FF")
