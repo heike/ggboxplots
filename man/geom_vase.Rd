@@ -81,24 +81,6 @@ p + geom_vase(fill = "grey80", colour = "#3366FF")
 qplot(factor(cyl), mpg, data = mtcars, geom = "vase",
   colour = I("#3366FF"))
 
-# Scales vs. coordinate transforms -------
-# Scale transformations occur before the density statistics are computed.
-# Coordinate transformations occur afterwards.  Observe the effect on the
-# number of outliers.
-library(plyr) # to access round_any
-m <- ggplot(movies, aes(y = votes, x = rating,
-   group = round_any(rating, 0.5)))
-m + geom_vase()
-m + geom_vase() + scale_y_log10()
-m + geom_vase() + coord_trans(y = "log10")
-m + geom_vase() + scale_y_log10() + coord_trans(y = "log10")
-
-# Vase plots with continuous x:
-# Use the group aesthetic to group observations in violins
-qplot(year, budget, data = movies, geom = "vase")
-qplot(year, budget, data = movies, geom = "vase",
-  group = round_any(year, 10, floor))
-
 x <- rnorm(2000)
 group <- rep(1:20, 100)
 y <- rep(c(1,2),1000)

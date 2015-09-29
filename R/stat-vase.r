@@ -50,6 +50,36 @@ stat_vase <- function(mapping = NULL, data = NULL, geom = "vase",
   )
 }
 
+compute_density <- function(x, w, from, to, bw = "nrd0", adjust = 1,
+                            kernel = "gaussian") {
+  n <- length(x)
+  if (is.null(w)) {
+    w <- rep(1 / n, n)
+  }
+  
+  # if less than 3 points, spread density evenly over points
+  if (n < 3) {
+    return(data.frame(
+      x = x,
+      density = w / sum(w),
+      scaled = w / max(w),
+      count = 1,
+      n = n
+    ))
+  }
+  
+  dens <- stats::density(x, weights = w, bw = bw, adjust = adjust,
+                         kernel = kernel, from = from, to = to)
+  
+  data.frame(
+    x = dens$x,
+    density = dens$y,
+    scaled =  dens$y / max(dens$y, na.rm = TRUE),
+    count =   dens$y * n,
+    n = n
+  )
+}
+
 #' @export 
 StatVase <- ggplot2::ggproto("StatVase", ggplot2::Stat,
   required_aes = c("x", "y"),
@@ -73,19 +103,22 @@ StatVase <- ggplot2::ggproto("StatVase", ggplot2::Stat,
                            scale = "area", adjust = 1,
                            kernel = "gaussian", ...) {
     data$weight <- data$weight %||% 1
+    data$weight <- 1/sum(data$weight)
     
     width <- width %||%  resolution(data$x, FALSE) 
     
     fivenum <- StatBoxplot$compute_group(data=data, width=width, ...)
-    data$weight <- 1/sum(data$weight)
-    if (nrow(data) < 3) {
-      dens <- data.frame(x=data$x, density=1/nrow(data), scaled=1/nrow(data), count=nrow(data), n=nrow(data), y=data$y)
-    } else {
-      dens <- suppressWarnings(StatYdensity$compute_group(data=data, adjust=adjust, ...))
+    dens <- compute_density(data$y, data$weight, from = fivenum$lower, to = fivenum$upper,
+                    adjust = adjust, kernel = kernel)
+    dens$y <- dens$x
+    dens$x <- mean(range(data$x))
+    
+    # Compute width if x has multiple values
+    if (length(unique(data$x)) > 1) {
+      width <- diff(range(data$x)) * 0.9
     }
-
-    # reduce data to box area:
-    dens <- dens[(dens$y >= fivenum$lower) & (dens$y <= fivenum$upper),]
+    dens$width <- width
+        
     dens$fivenum <- I(list(fivenum))
     dens
   },
