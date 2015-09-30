@@ -44,6 +44,6 @@ ggviolin(diamonds, cut, price, bandwidth=300, fill=cut) + scale_fill_brewer(pale
 Heike Hofmann
 }
 \references{
-hintze
+Hintze, J. L. and R. D. Nelson (1998). Violin plots: a box plot-density trace synergism. The American Statistician, 52(2):181-4.
 }
 

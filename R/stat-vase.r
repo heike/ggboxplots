@@ -107,7 +107,6 @@ StatVase <- ggplot2::ggproto("StatVase", ggplot2::Stat,
     width <- width %||%  resolution(data$x, FALSE) 
     
     fivenum <- StatBoxplot$compute_group(data=data, width=width, ...)
-    
     dens <- compute_density(data$y, data$weight, from = fivenum$lower, to = fivenum$upper,
                     adjust = adjust, kernel = kernel)
     dens$y <- dens$x
