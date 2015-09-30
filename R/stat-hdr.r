@@ -90,9 +90,12 @@ StatHdr <- ggplot2::ggproto("StatHdr", ggplot2::Stat,
     row.names(out) <- 1:nrow(out)
     out <- data.frame(common, out, row.names=NULL)
     
-    outsub <- subset(out, probs==max(probs))
-    outliers <- data$y[data$y > max(outsub$ymax) | data$y < min(outsub$ymin)]
-    out$out <- I(list(outliers))
+    browser()
+    idx <- which(data$y > max(out$ymax) | data$y < min(out$ymin))
+    if (length(idx) > 0) {
+      outliers <- data$y[idx]
+      out$out <- I(list(outliers))
+    } else out$out <- I(list(0))
 
     out$ymin_final <- min(data$y, na.rm=T)
     out$ymax_final <- max(data$y, na.rm=T)
