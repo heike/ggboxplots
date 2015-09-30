@@ -35,10 +35,9 @@ GeomHdr <- ggplot2::ggproto("GeomHdr", ggplot2::Geom,
     } else {
       outliers_grob <- NULL
     }
-    
     medians <- unique(data[,c("xmin", "xmax", "mode", "size")])
     medians$alpha <- NA
-    medians <- data.frame(medians, common)
+    medians <- data.frame(medians, common, row.names=NULL)
     medians$size <- medians$size * fatten
     medians <- transform(medians,
       x = xmin, 
@@ -89,15 +88,6 @@ GeomHdr <- ggplot2::ggproto("GeomHdr", ggplot2::Geom,
 #' p + geom_hdr() + coord_flip()
 #' qplot(factor(cyl), mpg, data = mtcars, geom = "hdr") +
 #'   coord_flip()
-#' 
-#' # Scale maximum width proportional to sample size:
-#' p + geom_hdr(scale = "count")
-#'
-#' # Scale maximum width to 1 for all violins:
-#' p + geom_hdr(scale = "width")
-#' 
-#' # Use a smaller bandwidth for closer density fit (default is 1).
-#' p + geom_hdr(adjust = .5)
 #' 
 #' # Add aesthetic mappings
 #' # Note that hdrs are automatically dodged when any aesthetic is 
