@@ -61,8 +61,8 @@ GeomHdr <- ggplot2::ggproto("GeomHdr", ggplot2::Geom,
   }
 )
 
-#' Side by side hdr plots.
-#'
+#' @rdname stat_hdr
+#' 
 #' @inheritParams ggplot2::geom_point
 #' @inheritParams ggplot2::geom_boxplot
 #' @inheritParams ggplot2::geom_violin
@@ -72,6 +72,7 @@ GeomHdr <- ggplot2::ggproto("GeomHdr", ggplot2::Geom,
 #' require(ggplot2)
 #' data(diamonds)
 #' gghdr(diamonds, color, price)
+#' ggplot(data=diamonds, aes(x=color, y=price)) + geom_hdr(alpha=0.5)
 #' gghdr(diamonds, cut, price, probs=c(50,25,12.5, 6.25, 1), fill=cut) + 
 #'   scale_fill_brewer(palette="Set1") + 
 #'   scale_colour_brewer(palette="Set1")
@@ -104,8 +105,9 @@ GeomHdr <- ggplot2::ggproto("GeomHdr", ggplot2::Geom,
 #' 
 #' x <- rnorm(2000)
 #' group <- rep(1:20, 100)
-#' y <- rep(c(1,2),1000)
+#' y <- factor(rep(c(1,2),1000))
 #' qplot(y,x,facets=~group, fill=factor(y), geom="hdr") 
+#' qplot(y,x,facets=~group, fill=factor(..probs..), geom="hdr") + scale_fill_brewer()
 #' }
 geom_hdr <- function (mapping = NULL, data = NULL, stat = "hdr", position = "dodge", show.legend = NA, inherit.aes = TRUE, width = 0.9, alpha = 0.25,
                        ...) {
